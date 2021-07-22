@@ -13,7 +13,7 @@ do
 
       tmpout=/tmp/gitProjectsStatusesOut
       git status > /tmp/gpso
-      egrep ^.*:$ /tmp/gpso > $tmpout
+      egrep '^Changes not staged for commit:$' /tmp/gpso > $tmpout
 
       while read s; do
         notifs+=("$s $d/$p")

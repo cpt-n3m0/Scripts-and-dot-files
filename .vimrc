@@ -1,3 +1,4 @@
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
@@ -12,13 +13,14 @@ Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'sillybun/vim-repl'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
 " setup plugins that run on start, order is important
 au VimEnter * NERDTree | wincmd p
 au BufReadPost,BufNew,BufNewFile * :exe 'RainbowLoad'
-set encoding=UTF-8
 
 "Leave NERDTree if it's the only window left open
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -37,6 +39,35 @@ if !has('gui_running')
   set t_Co=256
 endif
 
+set encoding=UTF-8
+
+let vimDir = '$HOME/.vim/'
+
+" setup swap backup dir (https://unix.stackexchange.com/questions/345494/vim-swap-file-issue)
+let tmpDir = expand(vimDir . 'tmp')
+if empty(glob(tmpDir))
+    silent call system('mkdir -p ' . tmpDir)
+endif
+set directory=$HOME/.vim/tmp
+
+" ------------------ start of persitent undo setup (https://stackoverflow.com/questions/5700389/using-vims-persistent-undo) ----
+" Put plugins and dictionaries in this dir (also on Windows)
+
+if stridx(&runtimepath, expand(vimDir)) == -1
+  " vimDir is not on runtimepath, add it
+  let &runtimepath.=','.vimDir
+endif
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . 'undodir')
+    " Create dirs
+    silent call system('mkdir -p ' . vimDir)
+    silent call system('mkdir -p ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
+" ------------------ end of persitent undo setup-----------------------------
 
 "folding settings
 set foldmethod=indent   "fold based on indent
