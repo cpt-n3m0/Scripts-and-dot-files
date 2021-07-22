@@ -1,22 +1,50 @@
 
-call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
-Plug 'ghifarit53/tokyonight-vim'
-Plug 'frazrepo/vim-rainbow'
-Plug 'itchyny/lightline.vim'
-Plug 'preservim/nerdtree'
-Plug 'kana/vim-smartinput'
-Plug 'sheerun/vim-polyglot'
-Plug 'preservim/nerdcommenter'
-Plug 'dense-analysis/ale'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'sillybun/vim-repl'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-call plug#end()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'ghifarit53/tokyonight-vim'
+Plugin 'frazrepo/vim-rainbow'
+Plugin 'itchyny/lightline.vim'
+Plugin 'preservim/nerdtree'
+Plugin 'kana/vim-smartinput'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'preservim/nerdcommenter'
+Plugin 'dense-analysis/ale'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'sillybun/vim-repl'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'ycm-core/YouCompleteMe'
+
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+"call plug#begin('~/.vim/plugged')
+
+"Plug 'morhetz/gruvbox'
+"Plug 'ghifarit53/tokyonight-vim'
+"Plug 'frazrepo/vim-rainbow'
+"Plug 'itchyny/lightline.vim'
+"Plug 'preservim/nerdtree'
+"Plug 'kana/vim-smartinput'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'preservim/nerdcommenter'
+"Plug 'dense-analysis/ale'
+"Plug 'ludovicchabant/vim-gutentags'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'sillybun/vim-repl'
+"Plug 'godlygeek/tabular'
+"Plug 'plasticboy/vim-markdown'
+
+"call plug#end()
 
 " setup plugins that run on start, order is important
 au VimEnter * NERDTree | wincmd p
@@ -126,6 +154,7 @@ let g:ale_sign_warning = '🔔'
 let g:ale_python_pylint_options='--max-line-length=180'
 let g:ale_python_flake8_options='--max-line-length=180'
 let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
 
 
 " Run currently open python script from within vim
