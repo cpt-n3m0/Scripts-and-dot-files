@@ -27,24 +27,6 @@ Plugin 'ycm-core/YouCompleteMe'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-"call plug#begin('~/.vim/plugged')
-
-"Plug 'morhetz/gruvbox'
-"Plug 'ghifarit53/tokyonight-vim'
-"Plug 'frazrepo/vim-rainbow'
-"Plug 'itchyny/lightline.vim'
-"Plug 'preservim/nerdtree'
-"Plug 'kana/vim-smartinput'
-"Plug 'sheerun/vim-polyglot'
-"Plug 'preservim/nerdcommenter'
-"Plug 'dense-analysis/ale'
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'sillybun/vim-repl'
-"Plug 'godlygeek/tabular'
-"Plug 'plasticboy/vim-markdown'
-
-"call plug#end()
 
 " setup plugins that run on start, order is important
 au VimEnter * NERDTree | wincmd p
@@ -61,13 +43,19 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 "have the same NERDTree window open in all tabs
 autocmd BufWinEnter * silent NERDTreeMirror
 
+vnoremap kj <Esc>
+vnoremap KJ <Esc>
+inoremap kj <Esc>
+inoremap KJ <Esc>
+
 nnoremap <F2> :exe "NERDTreeToggle" <CR>
+nnoremap <silent> <C-]> :YcmCompleter GoTo<cr>
+
+set encoding=UTF-8
 
 if !has('gui_running')
   set t_Co=256
 endif
-
-set encoding=UTF-8
 
 let vimDir = '$HOME/.vim/'
 
@@ -154,7 +142,8 @@ let g:ale_sign_warning = '🔔'
 let g:ale_python_pylint_options='--max-line-length=180'
 let g:ale_python_flake8_options='--max-line-length=180'
 let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
+let g:ale_lsp_suggestions = 1
+let g:ale_disable_lsp = 1
 
 
 " Run currently open python script from within vim
@@ -170,9 +159,41 @@ let g:tokyonight_transparent_background = 1
 colorscheme tokyonight
 set bg=light
 set bg=dark
-"highlight Normal ctermbg=None
 
 let g:lightline= {'colorscheme' : 'tokyonight'}
+
+"---- Enable Meta(Alt) key detection
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
+
+"---- Moving lines holding Alt
+nnoremap <silent><M-j> :m .+1<CR>==
+nnoremap <silent><M-k> :m .-2<CR>==
+inoremap <silent><M-j> <Esc>:m .+1<CR>==gi
+inoremap <silent><M-k> <Esc>:m .-2<CR>==gi
+vnoremap <silent><M-j> :m '>+1<CR>gv=gv
+vnoremap <silent><M-k> :m '<-2<CR>gv=gv
+
+
+"---- Search
+set grepprg=git\ grep
+let g:grep_cmd_opts = ''
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+"---- Arrow key mappings
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <<
+noremap <right> >>
 
 " REPL Python config from repository
 let g:repl_program = {
