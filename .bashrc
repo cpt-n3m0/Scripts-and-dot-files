@@ -138,5 +138,5 @@ fi
 bash ~/scripts/gitStatusNotif.sh
 printf "\e[31;1;38mGit statuses\e[m"
 cat /tmp/gitstatuses
-source "$HOME/.cargo/env"
-source /home/cpt-n3m0/alacritty/extra/completions/alacritty.bash
+#source "$HOME/.cargo/env"
+#source /home/cpt-n3m0/alacritty/extra/completions/alacritty.bash

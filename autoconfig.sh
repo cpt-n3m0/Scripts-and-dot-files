@@ -50,6 +50,7 @@ if [ $phase -eq 0 ]; then
   installList+='qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils '
   installList+='virt-manager '
   installList+='gnome-shell-extensions '
+  installList+='golang '
 
 
   sudo apt install -y $installList
@@ -88,13 +89,12 @@ if [ $phase -eq 1 ]; then
     ln kitty/themes/$f $kd/themes/$f
   done
 
-  gsettings set org.gnome.desktop.default-application.terminal exec kitty
+  gsettings set org.gnome.desktop.default-applications.terminal exec kitty
 
   echo "Setting Gnome config..."
-  gnome-shell-extension-tool -e user-themes
   dconf load / < ./gnome_tweaks.dconf
 
   echo "Setting Cron jobs"
-  (crontab -l; echo '1 * * * * $scd/getHN.py'; echo "0 * * * * dconf dump / > $wd/gnome_tweaks.dconf ") | crontab -
+  (crontab -l; echo '*/5 * * * * $scd/getHN.py'; echo "0 * * * * dconf dump / > $wd/gnome_tweaks.dconf ") | crontab -
   (sudo crontab -l; echo '* 12 * * * apt upgrade') | sudo crontab -
 fi
