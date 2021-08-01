@@ -7,6 +7,7 @@ if [[ -f $pf ]]; then
   echo "Continuing at phase $phase."
 else
   echo $phase > $pf
+fi
 
 if [ $phase -eq 0 ]; then
 
