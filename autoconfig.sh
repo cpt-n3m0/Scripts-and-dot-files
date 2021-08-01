@@ -10,33 +10,28 @@ else
 
 if [ $phase -eq 0 ]; then
 
+  echo "Configuration started"
+  echo "Setting up vim and bash configs"
   mv $HOME/.vimrc .vimrc.backup
   mv $HOME/.bashrc .bashrc.backup
-  mv $HOME/.config/kitty kittyoldconfig
 
   ln .vimrc $HOME/.vimrc
   cp .bashrc $HOME/.bashrc
 
-  kd=$HOME/.config/kitty
-  mkdir -p $kd/themes
-
-  ln kitty/kitty.conf $kd
-  for f in $(ls kitty/themes)
-  do
-    ln kitty/themes/$f $kd/themes/$f
-  done
-
+  echo "Installing themes and fonts"
   sudo cp -r ./Midnight-BlueNight /usr/share/themes
   sudo cp -r ./fantasque /usr/share/fonts
 
+  echo "Setting up scripts"
   scd=$HOME/scripts
   mkdir $scd
   ln getHN.py $scd/getHN.py
+  ln gitStatusNotif.sh $scd/gitStatusNotif.sh
 
-# Install necessary software
 
-  installList=' '
-  installList+='kitty '
+  echo "Beginning Installation of necessary software"
+
+  installList='kitty '
   installList+='ubuntu-gnome-desktop '
   installList+='gdm3 '
   installList+='okular '
@@ -77,12 +72,22 @@ if [ $phase -eq 0 ]; then
 fi
 
 if [ $phase -eq 1 ]; then
-  echo "Configuring Gnome"
-  # Configure gnome
+  echo "Setting kitty config..."
+  kd=$HOME/.config/kitty
+  mv $kd kitty_old
+  mkdir -p $kd/themes
+
+  ln kitty/kitty.conf $kd
+  for f in $(ls kitty/themes)
+  do
+    ln kitty/themes/$f $kd/themes/$f
+  done
+
+  echo "Setting Gnome config..."
   gnome-shell-extension-tool -e user-themes
-  # set up necessary jobs
-  echo "Loading gnome Tweaks"
   dconf load / < ./gnome_tweaks.dconf
+
+  echo "Setting Cron jobs"
   (crontab -l; echo '1 * * * * $scd/getHN.py'; echo "0 * * * * dconf dump / > $wd/gnome_tweaks.dconf ") | crontab -
   (sudo crontab -l; echo '* 12 * * * apt upgrade') | sudo crontab -
 fi
