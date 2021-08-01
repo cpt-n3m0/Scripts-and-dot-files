@@ -32,7 +32,7 @@ then
 
   echo "Beginning Installation of necessary software"
 
-mysoft=("kitty" "vim" "ubuntu-gnome-desktop" "gdm3" "okular" "gnome-tweaks" "python3" "python3-pip" "python3-venv" "cmake" "net-tools" "curl" "xclip" "wine" "gimp" "wireshark" "ffmpeg" "vlc" "qemu-kvmlibvirt-daemon-systemlibvirt-clientsbridge-utils" "virt-manager" "gnome-shell-extensions")
+mysoft=("kitty" "vim" "ubuntu-gnome-desktop" "gdm3" "okular" "gnome-tweaks" "python3" "python3-pip" "python3-venv" "cmake" "net-tools" "curl" "xclip" "wine" "gimp" "wireshark" "ffmpeg" "vlc" "qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils" "virt-manager" "gnome-shell-extensions" "npm" "golang")
 
   installList=''
   for s in "${mysoft[@]}"
@@ -50,7 +50,8 @@ mysoft=("kitty" "vim" "ubuntu-gnome-desktop" "gdm3" "okular" "gnome-tweaks" "pyt
   sudo apt update
   sudo apt install brave-browser -y
 
-  echo 1 > .config_phase
+  $phase=1
+  echo $phase > .config_phase
   #sudo reboot
 fi
 
@@ -79,8 +80,4 @@ if [ $phase -eq 1 ]; then
   (crontab -l; echo '*/5 * * * * $scd/getHN.py'; echo "0 * * * * dconf dump / > $wd/gnome_tweaks.dconf ") | crontab -
   (sudo crontab -l; echo '* 12 * * * apt upgrade') | sudo crontab -
 
-  sudo apt install golang npm -y
-  cd  ~/.vim/bundle/YouCompleteMe/; python3 install.py --all >> /dev/null &
-  cd
-  cd $wd
 fi
