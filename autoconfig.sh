@@ -52,7 +52,7 @@ if [ $phase -eq 0 ]; then
   installList+='gnome-shell-extensions '
 
 
-  "sudo apt install $installList -y"
+  sudo apt install -y $installList
 
   # Brave browser download
   sudo apt install apt-transport-https curl

@@ -135,7 +135,7 @@ then
     printf "\e[31;1;38mHacker News\e[m\n"
     cat /tmp/HNnews.headlines
 fi
-bash ~/Scripts/gitStatusNotif.sh
+bash ~/scripts/gitStatusNotif.sh
 printf "\e[31;1;38mGit statuses\e[m"
 cat /tmp/gitstatuses
 source "$HOME/.cargo/env"
