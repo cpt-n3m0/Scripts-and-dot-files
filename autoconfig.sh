@@ -63,7 +63,7 @@ if [ $phase -eq 0 ]; then
 
   sudo apt update
 
-  sudo apt install brave-browser
+  sudo apt install brave-browser -y
 
   phase=1
   echo $phase > .config_phase

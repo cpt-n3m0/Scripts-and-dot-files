@@ -545,6 +545,10 @@ window-size=(1231, 902)
 manager-window-height=550
 manager-window-width=550
 
+[org/virt-manager/virt-manager/confirm]
+delete-storage=true
+forcepoweroff=true
+
 [org/virt-manager/virt-manager/connections]
 autoconnect=['qemu:///system']
 uris=['qemu:///system']
@@ -562,6 +566,9 @@ isos=['/home/cpt-n3m0/Downloads/isos/ubuntu-20.04.2.0-desktop-amd64.iso', '/home
 disk-usage=false
 host-cpu-usage=true
 network-traffic=false
+
+[org/virt-manager/virt-manager/vms/70c3c79fb9224e74ae774962bb93d771]
+vm-window-size=(1024, 834)
 
 [org/yorba/shotwell/preferences/ui]
 display-basic-properties=true
