@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 PS1="\[\e[31;1;36m\]\u\[\e[31;1;91m\]@\[\e[31;1;36m\]\h:\[\e[00m\]\[\e[31;1;91m\]\w\[\e[31;1;36m\]\$\[\e[00m\] "
-PATH=$PATH:/home/cpt-n3m0/.local/bin:/home/cpt-n3m0/freesurfer/bin
+PATH=$PATH:/home/cpt-n3m0/.local/bin:/home/cpt-n3m0/freesurfer/bin:/home/cpt-n3m0/tizen-studio/ide/
 export TERM=xterm-256color
 export KEYEV=$(grep  "Keyboard: device is a keyboard" /var/log/Xorg.0.log | head -n 1 | awk '{ printf $4}')
 export HISTTIMEFORMAT="%d/%m/%y %T "
