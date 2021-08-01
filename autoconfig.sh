@@ -2,19 +2,22 @@ wd=$(pwd)
 pf='.config_phase'
 phase=0
 
-if [[ -f $pf ]]; then
+if [[ -f $pf ]]
+then
   phase=$(cat $pf)
   echo "Continuing at phase $phase."
 else
   echo $phase > $pf
 fi
 
-if [ $phase -eq 0 ]; then
+if [ $phase -eq 0 ]
+then
 
   echo "Configuration started"
+  ln  welcome $HOME/welcome
   echo "Setting up bash configs"
   mv $HOME/.bashrc .bashrc.backup
-  cp .bashrc $HOME/.bashrc
+  ln .bashrc $HOME/.bashrc
 
   echo "Installing themes and fonts"
   sudo cp -r ./Midnight-BlueNight /usr/share/themes
@@ -29,55 +32,33 @@ if [ $phase -eq 0 ]; then
 
   echo "Beginning Installation of necessary software"
 
-  installList='kitty '
-  installList+='vim '
-  installList+='ubuntu-gnome-desktop '
-  installList+='gdm3 '
-  installList+='okular '
-  installList+='gnome-tweaks '
-  installList+='python3 '
-  installList+='python3-pip '
-  installList+='python3-venv '
-  installList+='cmake '
-  installList+='net-tools '
-  installList+='curl '
-  installList+='xclip '
-  installList+='wine '
-  installList+='gimp '
-  installList+='wireshark '
-  installList+='ffmpeg '
-  installList+='vlc '
-  installList+='qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils '
-  installList+='virt-manager '
-  installList+='gnome-shell-extensions '
-  installList+='golang '
+mysoft=('kitty' 'vim' 'ubuntu-gnome-desktop' 'gdm3' 'okular' 'gnome-tweaks' 'python3' 'python3-pip' 'python3-venv' 'cmake' 'net-tools' 'curl' 'xclip' 'wine' 'gimp' 'wireshark' 'ffmpeg' 'vlc' 'qemu-kvmlibvirt-daemon-systemlibvirt-clientsbridge-utils' 'virt-manager' 'gnome-shell-extensions')
 
+  installList=''
+  for s in ${mysoft}
+  do
+    installList+=$s
+    installList+=' '
+  done
 
   sudo apt install -y $installList
 
   # Brave browser download
-  sudo apt install apt-transport-https curl
-
+  sudo apt install apt-transport-https -y
   sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-
   echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-
   sudo apt update
-
   sudo apt install brave-browser -y
 
-  phase=1
-  echo $phase > .config_phase
-  sudo reboot
+  echo 1 > .config_phase
+  #sudo reboot
 fi
 
 if [ $phase -eq 1 ]; then
-
   echo "Setting up vim config..."
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   mv $HOME/.vimrc .vimrc.backup
   ln .vimrc $HOME/.vimrc
-
   echo "Setting kitty config..."
   kd=$HOME/.config/kitty
   mv $kd kitty_old
@@ -97,4 +78,9 @@ if [ $phase -eq 1 ]; then
   echo "Setting Cron jobs"
   (crontab -l; echo '*/5 * * * * $scd/getHN.py'; echo "0 * * * * dconf dump / > $wd/gnome_tweaks.dconf ") | crontab -
   (sudo crontab -l; echo '* 12 * * * apt upgrade') | sudo crontab -
+
+  sudo apt install golang npm -y
+  cd  ~/.vim/bundle/YouCompleteMe/; python3 install.py --all >> /dev/null &
+  cd
+  cd $wd
 fi
