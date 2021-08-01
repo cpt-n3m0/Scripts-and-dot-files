@@ -11,11 +11,8 @@ else
 if [ $phase -eq 0 ]; then
 
   echo "Configuration started"
-  echo "Setting up vim and bash configs"
-  mv $HOME/.vimrc .vimrc.backup
+  echo "Setting up bash configs"
   mv $HOME/.bashrc .bashrc.backup
-
-  ln .vimrc $HOME/.vimrc
   cp .bashrc $HOME/.bashrc
 
   echo "Installing themes and fonts"
@@ -32,6 +29,7 @@ if [ $phase -eq 0 ]; then
   echo "Beginning Installation of necessary software"
 
   installList='kitty '
+  installList+='vim '
   installList+='ubuntu-gnome-desktop '
   installList+='gdm3 '
   installList+='okular '
@@ -72,6 +70,11 @@ if [ $phase -eq 0 ]; then
 fi
 
 if [ $phase -eq 1 ]; then
+
+  echo "Setting up vim config..."
+  mv $HOME/.vimrc .vimrc.backup
+  ln .vimrc $HOME/.vimrc
+
   echo "Setting kitty config..."
   kd=$HOME/.config/kitty
   mv $kd kitty_old
