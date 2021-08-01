@@ -73,6 +73,7 @@ fi
 if [ $phase -eq 1 ]; then
 
   echo "Setting up vim config..."
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   mv $HOME/.vimrc .vimrc.backup
   ln .vimrc $HOME/.vimrc
 
@@ -86,6 +87,8 @@ if [ $phase -eq 1 ]; then
   do
     ln kitty/themes/$f $kd/themes/$f
   done
+
+  gsettings set org.gnome.desktop.default-application.terminal exec kitty
 
   echo "Setting Gnome config..."
   gnome-shell-extension-tool -e user-themes
