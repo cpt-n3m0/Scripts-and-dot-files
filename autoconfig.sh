@@ -32,13 +32,13 @@ then
 
   echo "Beginning Installation of necessary software"
 
-mysoft=('kitty' 'vim' 'ubuntu-gnome-desktop' 'gdm3' 'okular' 'gnome-tweaks' 'python3' 'python3-pip' 'python3-venv' 'cmake' 'net-tools' 'curl' 'xclip' 'wine' 'gimp' 'wireshark' 'ffmpeg' 'vlc' 'qemu-kvmlibvirt-daemon-systemlibvirt-clientsbridge-utils' 'virt-manager' 'gnome-shell-extensions')
+mysoft=("kitty" "vim" "ubuntu-gnome-desktop" "gdm3" "okular" "gnome-tweaks" "python3" "python3-pip" "python3-venv" "cmake" "net-tools" "curl" "xclip" "wine" "gimp" "wireshark" "ffmpeg" "vlc" "qemu-kvmlibvirt-daemon-systemlibvirt-clientsbridge-utils" "virt-manager" "gnome-shell-extensions")
 
   installList=''
   for s in ${mysoft}
   do
     installList+=$s
-    installList+=' '
+    installList+=" "
   done
 
   sudo apt install -y $installList

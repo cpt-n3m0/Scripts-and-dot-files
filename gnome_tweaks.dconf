@@ -546,8 +546,8 @@ manager-window-height=550
 manager-window-width=550
 
 [org/virt-manager/virt-manager/confirm]
-delete-storage=true
-forcepoweroff=true
+delete-storage=false
+forcepoweroff=false
 
 [org/virt-manager/virt-manager/connections]
 autoconnect=['qemu:///system']
@@ -567,8 +567,14 @@ disk-usage=false
 host-cpu-usage=true
 network-traffic=false
 
+[org/virt-manager/virt-manager/vms/4bd58c507616459fa878f85162be2c9a]
+vm-window-size=(1024, 834)
+
 [org/virt-manager/virt-manager/vms/70c3c79fb9224e74ae774962bb93d771]
 vm-window-size=(1024, 834)
+
+[org/virt-manager/virt-manager/vms/9930c3ac0f324ecd9364fa88527784b5]
+vm-window-size=(800, 600)
 
 [org/yorba/shotwell/preferences/ui]
 display-basic-properties=true
