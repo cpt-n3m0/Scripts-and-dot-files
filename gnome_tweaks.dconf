@@ -138,7 +138,7 @@ video-x-resolution=640
 video-y-resolution=480
 
 [org/gnome/control-center]
-last-panel='bluetooth'
+last-panel='keyboard'
 
 [org/gnome/deja-dup]
 backend='google'
@@ -299,7 +299,7 @@ application-id='update-manager.desktop'
 application-id='vlc.desktop'
 
 [org/gnome/desktop/peripherals/keyboard]
-numlock-state=true
+numlock-state=false
 
 [org/gnome/desktop/peripherals/mouse]
 accel-profile='adaptive'
@@ -469,6 +469,14 @@ ignore-phase2-ca-cert=false
 [org/gnome/settings-daemon/plugins/color]
 night-light-enabled=false
 
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Primary><Alt>b'
+command='brave-browser --incognito'
+name='Open Brave'
+
 [org/gnome/settings-daemon/plugins/power]
 ambient-enabled=false
 power-button-action='interactive'
@@ -482,7 +490,7 @@ hinting='full'
 [org/gnome/shell]
 app-picker-view=uint32 1
 enabled-extensions=['ubuntu-dock@ubuntu.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'gTile@vibou', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'user-themes', 'user-them']
-favorite-apps=['kitty.desktop', 'brave-browser.desktop', 'spotify_spotify.desktop', 'org.gnome.Nautilus.desktop', 'teams.desktop', 'todoist_todoist.desktop']
+favorite-apps=['kitty.desktop', 'brave-browser.desktop', 'protonvpn.desktop', 'spotify_spotify.desktop', 'org.gnome.Nautilus.desktop', 'todoist_todoist.desktop', 'teams.desktop']
 had-bluetooth-devices-setup=true
 
 [org/gnome/shell/extensions/gtile]
@@ -495,9 +503,9 @@ name='Midnight-Blue'
 locations=@av []
 
 [org/gnome/software]
-check-timestamp=int64 1627629006
+check-timestamp=int64 1628135489
 first-run=false
-online-updates-timestamp=int64 1627587823
+online-updates-timestamp=int64 1628135497
 
 [org/gnome/system/location]
 enabled=false
@@ -538,7 +546,7 @@ sort-column='modified'
 sort-directories-first=false
 sort-order='descending'
 type-format='category'
-window-position=(345, 68)
+window-position=(23, 15)
 window-size=(1231, 902)
 
 [org/virt-manager/virt-manager]
@@ -567,7 +575,13 @@ disk-usage=false
 host-cpu-usage=true
 network-traffic=false
 
+[org/virt-manager/virt-manager/vms/0d420f71e2ef40de87033a6de4c923a2]
+vm-window-size=(1024, 834)
+
 [org/virt-manager/virt-manager/vms/4bd58c507616459fa878f85162be2c9a]
+vm-window-size=(1024, 834)
+
+[org/virt-manager/virt-manager/vms/520ee81093f0466fb80b522992496d7f]
 vm-window-size=(1024, 834)
 
 [org/virt-manager/virt-manager/vms/70c3c79fb9224e74ae774962bb93d771]
